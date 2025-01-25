@@ -9,6 +9,8 @@ namespace GroceryStore.Data
         {
         }
         public DbSet<Category> Category { get; set; }
+        public object Categories { get; internal set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
