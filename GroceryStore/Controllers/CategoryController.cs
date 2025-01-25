@@ -24,9 +24,88 @@ namespace GroceryStore.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.Category.Add(obj);
-            _db.SaveChanges();
-             return View();
+            if (obj.CategoryName == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("CategoryName", "The display order can not exactly match the Category name");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Category.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Category created successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+        //Edit
+        public IActionResult Edit(int? id)
+        {
+            if(id==null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _db.Category.Find(id);
+
+            if(categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Category.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Category Edited successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+
+        //Delete
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _db.Category.Find(id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category obj = _db.Category.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+          
+                _db.Category.Remove(obj);
+                _db.SaveChanges();
+            TempData["success"] = "Category Deleted successfully";
+            return RedirectToAction("Index");
+            
+         
+
         }
 
 

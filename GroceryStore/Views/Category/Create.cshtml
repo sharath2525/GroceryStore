@@ -9,13 +9,15 @@
     <hr/>
     <div class="mb-3 row p-1 ">
         <label asp-for="CategoryName"  style="font-size:20px"></label>
-        <input   class="form-control" />
+        <input asp-for="CategoryName"  class="form-control" />
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
         
     </div>
 
     <div class="mb-3 row p-1">
             <label asp-for="DisplayOrder"  style="font-size:20px"></label>
            <input asp-for="DisplayOrder" class="form-control" />
+           <span asp-validation-for="DisplayOrder" class="text-danger"></span>
     </div>
         <hr />
         <div class="row">
@@ -31,3 +33,10 @@
         
     </div>
 </form>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
