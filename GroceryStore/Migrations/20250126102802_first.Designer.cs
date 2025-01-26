@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroceryStore.Migrations
 {
     [DbContext(typeof(GroceryDbContext))]
-    [Migration("20250123055738_AddCatTODb")]
-    partial class AddCatTODb
+    [Migration("20250126102802_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,23 +26,43 @@ namespace GroceryStore.Migrations
 
             modelBuilder.Entity("GroceryStore.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DisplayOrder = 1,
+                            Name = "Fruit"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DisplayOrder = 2,
+                            Name = "Vegetable"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DisplayOrder = 3,
+                            Name = "Meat"
+                        });
                 });
 #pragma warning restore 612, 618
         }
