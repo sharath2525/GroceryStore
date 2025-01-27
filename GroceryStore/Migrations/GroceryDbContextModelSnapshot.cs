@@ -23,42 +23,42 @@ namespace GroceryStore.Migrations
 
             modelBuilder.Entity("GroceryStore.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            CategoryId = 1,
-                            CategoryName = "Fruit",
-                            DisplayOrder = 1
+                            Id = 1,
+                            DisplayOrder = 1,
+                            Name = "Fruit"
                         },
                         new
                         {
-                            CategoryId = 2,
-                            CategoryName = "Vegetable",
-                            DisplayOrder = 2
+                            Id = 2,
+                            DisplayOrder = 2,
+                            Name = "Vegetable"
                         },
                         new
                         {
-                            CategoryId = 3,
-                            CategoryName = "Meat",
-                            DisplayOrder = 3
+                            Id = 3,
+                            DisplayOrder = 3,
+                            Name = "Meat"
                         });
                 });
 

@@ -17,20 +17,20 @@ namespace GroceryStore.Data
             modelBuilder.Entity<Category>().HasData(
                 new Category
                 {
-                    CategoryId = 1,
-                    CategoryName = "Fruit",
+                    Id = 1,
+                    Name = "Fruit",
                     DisplayOrder = 1
                 },
                 new Category
                 {
-                    CategoryId = 2,
-                    CategoryName = "Vegetable",
+                    Id = 2,
+                    Name = "Vegetable",
                     DisplayOrder = 2
                 },
                 new Category
                 {
-                    CategoryId = 3,
-                    CategoryName = "Meat",
+                    Id = 3,
+                    Name = "Meat",
                     DisplayOrder = 3
                 }
             );
