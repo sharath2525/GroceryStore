@@ -28,13 +28,9 @@ namespace GroceryStore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
+            if (obj.CategoryName == obj.DisplayOrder.ToString())
             {
-<<<<<<< HEAD
                 ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category name");
-=======
-                ModelState.AddModelError("Name", "The display order can not exactly match the Category name");
->>>>>>> e632f78a8bce6adc115cf357e05024a8b05cba5b
             }
             if (ModelState.IsValid)
             {
@@ -53,7 +49,7 @@ namespace GroceryStore.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.CategoryId == id);
 
             if (categoryFromDb == null)
             {
@@ -82,7 +78,7 @@ namespace GroceryStore.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.CategoryId == id);
 
             if (categoryFromDb == null)
             {
@@ -94,11 +90,7 @@ namespace GroceryStore.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-<<<<<<< HEAD
             Category? obj = _unitOfWork.Category.Get(u => u.CategoryId == id);
-=======
-            Category obj = _unitOfWork.Category.Get(u => u.Id == id);
->>>>>>> e632f78a8bce6adc115cf357e05024a8b05cba5b
 
             if (obj == null)
             {

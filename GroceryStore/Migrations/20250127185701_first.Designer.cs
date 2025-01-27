@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroceryStore.Migrations
 {
     [DbContext(typeof(GroceryDbContext))]
-    [Migration("20250127083848_productpageupdate")]
-    partial class productpageupdate
+    [Migration("20250127185701_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
