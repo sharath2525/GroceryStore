@@ -1,0 +1,85 @@
+﻿@model ProductVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-dark ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2" style="color:black">@(Model.Product.ProductId!=0?"Update":"Create")Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Product.ProductId"  hidden/>
+            <input asp-for="Product.ImageUrl" hidden />
+            <div class=row>
+                <div class="col-10">
+                    <div class="border p-3 mt-4">
+                        <div class="mb-3 row p-2">
+                            <label asp-for="Product.ProductName" style="font-size:20px" class="pb-2">Product Name</label>
+                            <input asp-for="Product.ProductName" class="form-control" />
+                            <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Product.Description" style="font-size:20px" class="pb-2">Description</label>
+                            <input asp-for="Product.Description" class="form-control" />
+                            <span asp-validation-for="Product.Description" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Product.ImageUrl" style="font-size:20px" class="pb-2">Upload Image</label>
+                            <input type="file" name="file" class="form-control" />
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Product.Price" style="font-size:20px" class="pb-2">Price</label>
+                            <input asp-for="Product.Price" class="form-control" />
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Product.Quantity" style="font-size:20px" class="pb-2">Quantity</label>
+                            <input asp-for="Product.Quantity" class="form-control" />
+                            <span asp-validation-for="Product.Quantity" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-3">
+                            <label asp-for="Product.CategoryId" class="pb-2">Category</label>
+                            <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-control">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                @if (@Model.Product.ProductId != 0)
+                                {
+                                    <button type="submit" class="btn btn-success form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">
+                                    Back to List
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <img src="@Model.Product.ImageUrl" width="100%" style=" border-radius:5px; border:1px solid " />
+
+
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+                <partial name="_ValidationScriptsPartial"/>
+    }
+}

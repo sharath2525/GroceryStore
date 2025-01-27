@@ -1,22 +1,20 @@
-﻿@model List<Category>
-<partial name="_Notification" /> 
+﻿@model List<GroceryStore.Models.Category>
+<partial name="_Notification" />
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-dark ml-0 py-3">
-        <div class="row ">
+        <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2  " style="color:black">Category List</h2>
+                <h2 class="text-white py-2">Category List</h2>
             </div>
         </div>
-
     </div>
     <div class="card-body p-4">
         <div class="row pb-3">
             <div class="col-6"></div>
-
             <div class="col-6 text-end">
                 <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
-                    <i class="bi bi-plus-square"></i>  Add New Category
+                    <i class="bi bi-plus-square"></i> Add New Category
                 </a>
             </div>
         </div>
@@ -25,9 +23,9 @@
                 <tr>
                     <th>Category Name</th>
                     <th>Display Order</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach (var obj in Model.OrderBy(u => u.DisplayOrder))
                 {
@@ -46,8 +44,7 @@
                         </td>
                     </tr>
                 }
+            </tbody>
         </table>
     </div>
-
 </div>
-

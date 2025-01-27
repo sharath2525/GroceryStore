@@ -17,10 +17,8 @@ namespace GroceryStore.Repository
 
         public void Update(Category obj)
         {
-            _db.Category.Update(obj);
+            _db.Categories.Update(obj);
         }
 
-
-        
     }
 }

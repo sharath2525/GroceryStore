@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroceryStore.Migrations
 {
     [DbContext(typeof(GroceryDbContext))]
-    [Migration("20250123055738_AddCatTODb")]
-    partial class AddCatTODb
+    [Migration("20250126125800_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,26 @@ namespace GroceryStore.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Fruit",
+                            DisplayOrder = 1
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Vegetable",
+                            DisplayOrder = 2
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Meat",
+                            DisplayOrder = 3
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -2,10 +2,12 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace GroceryStore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCatTODb : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +24,16 @@ namespace GroceryStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryName", "DisplayOrder" },
+                values: new object[,]
+                {
+                    { 1, "Fruit", 1 },
+                    { 2, "Vegetable", 2 },
+                    { 3, "Meat", 3 }
                 });
         }
 
