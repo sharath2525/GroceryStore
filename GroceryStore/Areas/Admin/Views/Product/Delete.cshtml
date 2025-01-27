@@ -1,0 +1,72 @@
+﻿@model Product
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-dark ml-0 py-3">
+        <div class="row ">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2  " style="color:black">Delete Product</h2>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body p-4">
+
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="border p-3 mt-4">
+                <div class="border p-3 mt-4">
+                    <div class="mb-3 row p-2">
+                        <label asp-for="ProductName" style="font-size:20px" class="pb-2">Product Name</label>
+                        <input asp-for="ProductName"  disabled class="form-control" />
+                     
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="Description" style="font-size:20px" class="pb-2">Description</label>
+                        <input asp-for="Description" disabled  class="form-control" />
+                        
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="ImageUrl" style="font-size:20px" class="pb-2">Upload Image</label>
+                        <input type="file" asp-for="ImageUrl" disabled class="form-control" />
+                 
+                        
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="Price" style="font-size:20px" class="pb-2">Price</label>
+                        <input asp-for="Price" disabled class="form-control" />
+                   
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="Quantity" style="font-size:20px" class="pb-2">Quantity</label>
+                        <input asp-for="Quantity" disabled  class="form-control" />
+                     
+                    </div>
+                   @* <div class="mb-3 row p-1">
+                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="pb-2">
+                            <option disabled selected>--Select Category--</option>
+                            @foreach (var obj in ViewBag.CategoryList)
+                            {
+                                <option value="@obj.CategoryId">@obj.CategoryName</option>
+                            }
+                        </select>
+                        <input asp-for="CategoryId" disabled  class="form-control" />
+                 
+                    </div>*@
+                <hr />
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Delete</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+

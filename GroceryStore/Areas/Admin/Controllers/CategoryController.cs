@@ -12,23 +12,29 @@ namespace GroceryStore.Areas.Admin.Controllers
         public CategoryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
         }
+
         public IActionResult Index()
         {
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
+
         public IActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if (obj.CategoryName == obj.DisplayOrder.ToString())
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
-                ModelState.AddModelError("CategoryName", "The display order can not exactly match the Category name");
+<<<<<<< HEAD
+                ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category name");
+=======
+                ModelState.AddModelError("Name", "The display order can not exactly match the Category name");
+>>>>>>> e632f78a8bce6adc115cf357e05024a8b05cba5b
             }
             if (ModelState.IsValid)
             {
@@ -37,11 +43,9 @@ namespace GroceryStore.Areas.Admin.Controllers
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
-
+            return View(obj);
         }
 
-        //Edit
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -49,7 +53,7 @@ namespace GroceryStore.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.CategoryId == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -65,14 +69,11 @@ namespace GroceryStore.Areas.Admin.Controllers
             {
                 _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Category Edited successfully";
+                TempData["success"] = "Category edited successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
-
-        //Delete
 
         public IActionResult Delete(int? id)
         {
@@ -81,7 +82,7 @@ namespace GroceryStore.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.CategoryId == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -93,7 +94,11 @@ namespace GroceryStore.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category obj = _unitOfWork.Category.Get(u => u.CategoryId == id);
+<<<<<<< HEAD
+            Category? obj = _unitOfWork.Category.Get(u => u.CategoryId == id);
+=======
+            Category obj = _unitOfWork.Category.Get(u => u.Id == id);
+>>>>>>> e632f78a8bce6adc115cf357e05024a8b05cba5b
 
             if (obj == null)
             {
@@ -102,11 +107,8 @@ namespace GroceryStore.Areas.Admin.Controllers
 
             _unitOfWork.Category.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category Deleted successfully";
+            TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
-
-
-
     }
 }

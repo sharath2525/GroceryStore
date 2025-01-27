@@ -3,6 +3,7 @@ using GroceryStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroceryStore.Migrations
 {
     [DbContext(typeof(GroceryDbContext))]
-    partial class GroceryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250127083848_productpageupdate")]
+    partial class productpageupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,42 +26,42 @@ namespace GroceryStore.Migrations
 
             modelBuilder.Entity("GroceryStore.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            DisplayOrder = 1,
-                            Name = "Fruit"
+                            CategoryId = 1,
+                            CategoryName = "Fruit",
+                            DisplayOrder = 1
                         },
                         new
                         {
-                            Id = 2,
-                            DisplayOrder = 2,
-                            Name = "Vegetable"
+                            CategoryId = 2,
+                            CategoryName = "Vegetable",
+                            DisplayOrder = 2
                         },
                         new
                         {
-                            Id = 3,
-                            DisplayOrder = 3,
-                            Name = "Meat"
+                            CategoryId = 3,
+                            CategoryName = "Meat",
+                            DisplayOrder = 3
                         });
                 });
 
