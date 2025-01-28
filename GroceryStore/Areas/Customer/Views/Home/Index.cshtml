@@ -1,4 +1,131 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<Product>
+
+    @{
+    ViewBag.Title = "Home Page";
 }
-<h1>This is my home page i want ot add categories here</h1>
+<section style="background-image: url('/images/general/homebanner.png'); background-repeat: no-repeat; width:100%; background-size: cover; background-position: center; padding: 60px 0;border-radius:40px;">
+    <div class="container-lg text-light">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold"><span class="text-dark">Fresh</span> & <span class="text-success">Organic</span> Groceries</h1>
+                <p class="lead">Get the best quality fruits, vegetables, and dairy products delivered to your doorstep.</p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="#" class="btn btn-dark btn-lg rounded-pill px-4 py-3 shadow">Shop Now</a>
+                    <a href="#" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 shadow">Join Us</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card border-0 bg-success text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#delivery"></use></svg>
+                        <h5 class="card-title">Free Delivery</h5>
+                        <p class="card-text">Enjoy free delivery on all orders, bringing  to your doorstep.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-dark text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#quality"></use></svg>
+                        <h5 class="card-title">Best Quality</h5>
+                        <p class="card-text">We ensure the highest quality standards for all our products.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-danger text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#support"></use></svg>
+                        <h5 class="card-title">24/7 Support</h5>
+                        <p class="card-text">Our customer support team is here to help you anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<h3 style="padding:20px ">Top Products</h3>
+</hr>
+ 
+
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-2 border-success p-3 shadow-lg hover-effect"
+                         onclick="window.location.href='@Url.Action("Details", "Home", new { id = product.ProductId })';"
+                         style="cursor: pointer; transition: all 0.3s ease;">
+                        <img src="@product.ImageUrl" class="card-img-top rounded-3 product-image"
+                             alt="@product.ProductName" style="height: 200px; object-fit: cover;">
+                        <div class="card-body pb-0 position-relative">
+                            <div class="position-absolute bottom-0 end-0 m-2">
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId"
+                                   class="btn btn-success btn-sm rounded-pill px-3 py-2 shadow-sm cart-button"
+                                   onclick="event.stopPropagation();">
+                                    <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                </a>
+                            </div>
+                            <div class="pl-1 mb-2">
+                                <h5 class="card-title text-dark fw-bold text-truncate">
+                                    @product.ProductName
+                                </h5>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-success fs-5 fw-bold mb-0">
+                                    @product.Price.ToString("C")
+                                </p>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .hover-effect:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+        transition: transform 0.3s ease;
+    }
+
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+
+    .cart-button {
+        background: #28a745;
+        border: none;
+        transition: all 0.3s ease;
+        z-index: 2;
+    }
+
+        .cart-button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-title {
+        position: relative;
+        padding-bottom: 5px;
+    }
+</style>
+
