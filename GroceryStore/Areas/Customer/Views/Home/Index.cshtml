@@ -3,7 +3,7 @@
     @{
     ViewBag.Title = "Home Page";
 }
-<section style="background-image: url('/images/general/homebanner.png'); background-repeat: no-repeat; width:100%; background-size: cover; background-position: center; padding: 60px 0;border-radius:40px;">
+<section style="background-image: url('/images/general/homebanner.png'); background-repeat: no-repeat;  background-size: cover; background-position: center; padding: 60px 0;border-radius:40px;">
     <div class="container-lg text-light">
         <div class="row align-items-center">
             <div class="col-lg-6">
@@ -49,8 +49,8 @@
     </div>
 </section>
 
-<h3 style="padding:20px ">Top Products</h3>
-</hr>
+<h1 style="padding:20px ">Top Products</h1>
+
  
 
 
@@ -68,7 +68,7 @@
                         <div class="card-body pb-0 position-relative">
                             <div class="position-absolute bottom-0 end-0 m-2">
                                 <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId"
-                                   class="btn btn-success btn-sm rounded-pill px-3 py-2 shadow-sm cart-button"
+                                   class="btn btn-success  btn-sm rounded-pill px-2 py-2 shadow-sm cart-button"
                                    onclick="event.stopPropagation();">
                                     <i class="fas fa-cart-plus me-2"></i>Add to Cart
                                 </a>
@@ -78,8 +78,8 @@
                                     @product.ProductName
                                 </h5>
                             </div>
-                            <div class="pl-1">
-                                <p class="text-success fs-5 fw-bold mb-0">
+                            <div class="pl-1 mb-2 ">
+                                <p class="text-success fs-5 fw-bold mb-0 text-dark">
                                     @product.Price.ToString("C")
                                 </p>
                              
