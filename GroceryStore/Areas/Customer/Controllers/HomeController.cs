@@ -24,9 +24,9 @@ namespace GroceryStore.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int productId)
         {
-            Product product = _unitOfWork.Product.Get(u=>u.ProductId==id,includeProperties: "Category");
+            Product product = _unitOfWork.Product.Get(u=>u.ProductId==productId,includeProperties: "Category");
 
             return View(product);
         }
