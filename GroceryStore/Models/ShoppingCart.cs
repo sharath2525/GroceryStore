@@ -19,5 +19,9 @@ namespace GroceryStore.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+        //public IEnumerable<ShoppingCart> ShoppingCartList { get; internal set; }
+        //public IEnumerable<ShoppingCart> ShoppingCartList { get; internal set; }
+        [NotMapped]
+        public double Price { get; set; }
     }
 }

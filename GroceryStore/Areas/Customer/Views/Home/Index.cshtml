@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<Product>
 
-    @{
-    ViewBag.Title = "Home Page";
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
 }
+
 <section style="background-image: url('/images/general/homebanner.png'); background-repeat: no-repeat;  background-size: cover; background-position: center; padding: 60px 0;border-radius:40px;">
     <div class="container-lg text-light">
         <div class="row align-items-center">
