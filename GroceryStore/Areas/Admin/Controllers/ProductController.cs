@@ -2,17 +2,21 @@
 using GroceryStore.Models;
 using GroceryStore.Models.ViewModels;
 using GroceryStore.Repository.IRepository;
+using GroceryStore.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GroceryStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private string wwwRootPath;
+        private object productVM;
 
         public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -23,7 +27,7 @@ namespace GroceryStore.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
 
             return View(objProductList);
         }
@@ -107,37 +111,46 @@ namespace GroceryStore.Areas.Admin.Controllers
             }
         }
 
+      
+        #region API CALLS
+        [HttpGet]
 
-        public IActionResult Delete(int? id)
+        public IActionResult GetAll()
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Product? ProductFromDb = _unitOfWork.Product.Get(u => u.ProductId == id);
-
-            if (ProductFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(ProductFromDb);
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+           
+            return Json(new { data = objProductList });
         }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
+        [HttpDelete]
+     
+        public IActionResult Delete(int? id )
         {
-            Product? obj = _unitOfWork.Product.Get(u => u.ProductId == id);
+            var productToBeDeleted = _unitOfWork.Product.Get(u => u.ProductId == id);
+            
+                if (productToBeDeleted == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
 
-            if (obj == null)
-            {
-                return NotFound();
-            }
+                var oldImagePath = Path.Combine(wwwRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
 
-            _unitOfWork.Product.Remove(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
+
+                _unitOfWork.Product.Remove(productToBeDeleted);
+                _unitOfWork.Save();
+
+
+
+
+            return Json(new { success = true, message = "Deleted Successfully" });
         }
+        #endregion
     }
 }
+
+
+
+

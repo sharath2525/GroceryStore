@@ -1,4 +1,145 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<Product>
+
+    @{
+    ViewBag.Title = "Home Page";
 }
-<h1>This is my home page i want ot add categories here</h1>
+<section style="background-image: url('/images/general/homebanner.png'); background-repeat: no-repeat;  background-size: cover; background-position: center; padding: 60px 0;border-radius:40px;">
+    <div class="container-lg text-light">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold"><span class="text-dark">Fresh</span> & <span class="text-success">Organic</span> Groceries</h1>
+                <p class="lead">Get the best quality fruits, vegetables, and dairy products delivered to your doorstep.</p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="#" class="btn btn-dark btn-lg rounded-pill px-4 py-3 shadow">Shop Now</a>
+                    <a href="#" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 shadow">Join Us</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card border-0 bg-success text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#delivery"></use></svg>
+                        <h5 class="card-title">Free Delivery</h5>
+                        <p class="card-text">Enjoy free delivery on all orders, bringing  to your doorstep.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-dark text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#quality"></use></svg>
+                        <h5 class="card-title">Best Quality</h5>
+                        <p class="card-text">We ensure the highest quality standards for all our products.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-danger text-light p-4 rounded-3 shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <svg width="60" height="60" class="mb-3"><use xlink:href="#support"></use></svg>
+                        <h5 class="card-title">24/7 Support</h5>
+                        <p class="card-text">Our customer support team is here to help you anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<h1 style="padding:20px ">Top Products</h1>
+
+ 
+
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card product-card border-0 shadow-lg rounded">
+                        <div class="card-img-container">
+                            <img src="@product.ImageUrl" class="card-img-top rounded-top" />
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-uppercase text-success">@product.ProductName</h5>
+                            <p class="card-text text-secondary">Available: <strong>@product.Quantity</strong></p>
+                            <p class="card-price text-dark">₹@product.Price</p>
+                            <a asp-area="Customers" asp-action="Details" asp-controller="Home" asp-route-id="@product.ProductId"
+                               class="btn custom-btn bg-dark text-white">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    /* General Card Styling */
+    .product-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border-top: 4px solid #00a859;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 168, 89, 0.2);
+        }
+
+    /* Image Container */
+    .card-img-container {
+        overflow: hidden;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+        .card-img-container img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-img-container:hover img {
+            transform: scale(1.1);
+        }
+
+    /* Card Body */
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #00a859;
+    }
+
+    .card-price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #007b55;
+    }
+
+    /* Custom Button */
+    .custom-btn {
+        background: #28a745;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+        .custom-btn:hover {
+            background: #28a745;
+            transform: scale(1.05);
+        }
+</style>

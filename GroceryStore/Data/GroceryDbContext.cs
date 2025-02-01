@@ -1,19 +1,22 @@
 ﻿using GroceryStore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;        
 
 namespace GroceryStore.Data
 {
-    public class GroceryDbContext : DbContext
+    public class GroceryDbContext : IdentityDbContext
     {
         public GroceryDbContext(DbContextOptions<GroceryDbContext> options) : base(options)
         {
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers {get; set;}
         //public object Categories { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData(
                 new Category
                 {
