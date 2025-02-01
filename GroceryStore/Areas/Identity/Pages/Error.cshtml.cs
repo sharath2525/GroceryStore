@@ -6,7 +6,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using GroceryStore.Areas.Identity.Pages;
 namespace GroceryStore.Areas.Identity.Pages
 {
     /// <summary>
