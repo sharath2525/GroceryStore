@@ -25,17 +25,21 @@
                 <form asp-controller="Cart" asp-action="AddToCart" method="post">
                     <input type="hidden" name="productId" value="@Model.ProductId" />
                     <div class="row align-items-center mb-4">
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">Quantity:</label>
-                            <select name="quantity" class="form-select form-select-lg" style="width: 100px;" required>
-                                @for (int i = 1; i <= 10; i++)
-                                {
-                                    <option value="@i">@i</option>
-                                }
-                            </select>
+                        <div class="row pl-2 mb-3">
+                            <div class="col-md-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-dark text-white border-0 fw-semibold"
+                                          id="inputGroup-sizing-default">
+                                        Quantity
+                                    </span>
+                                    <input type="number" value="1" class="form-control text-end"
+                                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-8">
-                            <button type="submit" class="btn btn-success btn-lg w-100 py-3" asp-controller="Cart"
+                            <button type="submit" class="btn btn-dark btn-lg w-100 py-3" asp-controller="Cart" disabled
                             asp-action="AddToCart" asp-route-productId="@Model.ProductId" onclick="event.stopPropagation();">
                                  <i class="fas fa-cart-plus me-2"></i>Add to Cart
                              </button>

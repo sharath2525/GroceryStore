@@ -67,7 +67,7 @@
                             <h5 class="card-title text-uppercase text-success">@product.ProductName</h5>
                             <p class="card-text text-secondary">Available: <strong>@product.Quantity</strong></p>
                             <p class="card-price text-dark">₹@product.Price</p>
-                            <a asp-area="Customers" asp-action="Details" asp-controller="Home" asp-route-id="@product.ProductId"
+                            <a  asp-action="Details"  asp-route-productId="@product.ProductId"
                                class="btn custom-btn bg-dark text-white">View Details</a>
                         </div>
                     </div>
