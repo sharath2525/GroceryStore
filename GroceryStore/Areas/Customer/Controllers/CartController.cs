@@ -73,36 +73,36 @@ namespace GroceryStore.Areas.Customer.Controllers
 
 		[HttpPost]
 		[ActionName("Summary")]
-		public IActionResult SummaryPOST()
+		public IActionResult SummaryPOST(ShoppingCartVM obj)
 		{
 			var claimsIdentity = (ClaimsIdentity)User.Identity;
 			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-			ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
+			obj.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
 				includeProperties: "Product");
 
-			ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
-			ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
+			obj.OrderHeader.OrderDate = System.DateTime.Now;
+			//ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
 
 			//ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
-			foreach (var cart in ShoppingCartVM.ShoppingCartList)
+			foreach (var cart in obj.ShoppingCartList)
 			{
 				cart.Price = GetPrice(cart);
 				ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
 			}
 
-			ShoppingCartVM.OrderHeader.PaymentStatus = "Failed";
-			ShoppingCartVM.OrderHeader.OrderStatus = "Failed";
+			obj.OrderHeader.PaymentStatus = "Pending";
+			obj.OrderHeader.OrderStatus = "Pending";
 
-			_unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
+			_unitOfWork.OrderHeader.Add(obj.OrderHeader);
 			_unitOfWork.Save();
-			foreach (var cart in ShoppingCartVM.ShoppingCartList)
+			foreach (var cart in obj.ShoppingCartList)
 			{
 				OrderDetail orderDetail = new()
 				{
 					ProductId = cart.ProductId,
-					OrderHeaderId = ShoppingCartVM.OrderHeader.OrderHeaderId,
+					OrderHeaderId = obj.OrderHeader.Id,
 					Price = cart.Price,
 					Count = cart.Count
 				};

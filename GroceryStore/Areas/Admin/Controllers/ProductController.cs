@@ -132,18 +132,19 @@ namespace GroceryStore.Areas.Admin.Controllers
             return View(productFromDb);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
             Product obj = _unitOfWork.Product.Get(u => u.ProductId == id);
             if (obj == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
             _unitOfWork.Product.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "Delete Successful" });
+            //TempData["success"] = "Product deleted successfully";
+            //return RedirectToAction("Index");
         }
     }
 }

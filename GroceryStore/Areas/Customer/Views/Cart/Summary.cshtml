@@ -2,6 +2,7 @@
 
 
 <form method="post">
+	<input type="hidden" asp-for="@Model.OrderHeader.ApplicationUserId" value="@Model.OrderHeader.ApplicationUser.Id" />
 	<br />
 	<div class="container">
 		<div class="card shadow border-0">
