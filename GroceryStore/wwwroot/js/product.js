@@ -8,6 +8,15 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": { url: '/admin/product/getall' },
+        type="Get",
+        dataSrc: '',
+        error: function (xhr, error, thrown) {
+            console.log("Error: " + error);
+            console.log("Thrown: " + thrown);
+            console.log("Response: " + xhr.responseText);
+        }
+    },
+
         "columns": [
             { "data": "productName", "width": "15%" },
             {

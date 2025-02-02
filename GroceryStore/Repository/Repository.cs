@@ -78,7 +78,7 @@ namespace GroceryStore.Repository
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return dbSet.ToList();
         }
 
         public void Remove(T entity)
