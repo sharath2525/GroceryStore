@@ -39,5 +39,6 @@ namespace GroceryStore.Models
         public string PostalCode { get; set; }
         [Required]
         public string Name { get; set; }
-    }
+		public int OrderHeaderId { get; internal set; }
+	}
 }

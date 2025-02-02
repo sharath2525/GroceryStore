@@ -108,8 +108,17 @@ namespace GroceryStore.Areas.Admin.Controllers
             }
 
         }
+	
+		[HttpGet]
 
-        public IActionResult Delete(int? id)
+		public IActionResult GetAll()
+		{
+			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+
+			return Json(new { data = objProductList });
+		}
+
+		public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
