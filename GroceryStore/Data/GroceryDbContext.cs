@@ -11,7 +11,12 @@ namespace GroceryStore.Data
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers {get; set;}
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+
         //public object Categories { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

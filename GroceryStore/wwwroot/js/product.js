@@ -7,7 +7,11 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/product/getall' },
+        "ajax": {
+            "url": "/admin/product/getall",
+            "type": "GET",
+            "datatype": "json"
+        },
         "columns": [
             { "data": "productName", "width": "15%" },
             {
@@ -19,7 +23,7 @@ function loadDataTable() {
                 },
                 defaultContent: 'No image',
                 title: 'Image',
-                width:"15%"
+                width: "15%"
             },
             { "data": "price", "width": "10%" },
             { "data": "quantity", "width": "10%" },
@@ -27,8 +31,7 @@ function loadDataTable() {
             { "data": "category.categoryName", "width": "10%" },
             {
                 "data": "productId",
-                "render": function (data)
-                {
+                "render": function (data) {
                     return `
                             <div class="w-75 btn-group" role="group">
                                 <a href="/admin/product/upsert?id=${data}" class="btn btn-primary bg-dark mx-2">

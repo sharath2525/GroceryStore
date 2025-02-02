@@ -13,10 +13,7 @@ namespace GroceryStore.Repository
             _db = db;
         }
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Update(Product obj)
         {
